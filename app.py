@@ -11,6 +11,13 @@ app = Flask(__name__)
 YOLO_PATH = "yolov5"
 WEIGHTS_PATH = "yolov5s.pt"
 
+# Ana Sayfa ("/") route'u ekliyoruz
+
+
+@app.route('/')
+def home():
+    return "API is working fine! Use /count-birds for bird counting."
+
 
 @app.route('/count-birds', methods=['POST'])
 def count_birds_api():
@@ -47,7 +54,7 @@ def count_birds_api():
                 os.path.join(YOLO_PATH, "detect.py"),
                 "--weights", WEIGHTS_PATH,
                 "--source", file_path,
-                "--conf", "0.25",
+                "--conf", "0.1",
                 "--save-txt",
                 "--exist-ok",
                 "--project", "runs/detect",
